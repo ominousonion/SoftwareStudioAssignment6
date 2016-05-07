@@ -29,14 +29,13 @@ public class MainApplet extends PApplet{
 	
 	private final static int width = 1200, height = 650;
 	
-	
-	//big circle
-	bigCircle bc = new bigCircle(this);
+
 	
 	
 	
 	public void setup() {	
 		Ani.init(this);
+		this.ellipseMode(this.RADIUS);
 		episodes = new ArrayList<Episode>();
 		for(int i=1;i<8;i++){
 			Episode epi = new Episode(this,i);
@@ -54,7 +53,6 @@ public class MainApplet extends PApplet{
 	public void draw() {
 		background(255);
 		episodes.get(this.cur_episode-1).display();
-		bc.display();
 	}
 
 	private void loadData(){
@@ -92,9 +90,18 @@ public class MainApplet extends PApplet{
 	}
 
 	public void mouseReleased() {
-		for(Character chara: episodes.get(this.cur_episode-1).characters){
-			chara.click=false;
-			chara.reset();
+		Episode epi=episodes.get(this.cur_episode-1);
+		
+		for(Character chara: epi.characters){
+			if(epi.bc.insideCircle(chara.x, chara.y)){
+				epi.bc.addNodes(chara.id);
+			}
+			else{
+				epi.bc.deleteNodes(chara.id);
+				chara.click=false;
+				chara.reset();				
+			}
+
 		}
 	}
 

@@ -3,15 +3,19 @@ package main.java;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-public class bigCircle {
+public class BigCircle {
 	
 	private MainApplet parent;
-	public float x=650, y=325, radius=250;	
-	public int nodesnum=0;
+	public float x, y, radius;	
+	public int nodesnum;
 	public int nodesorder[]=new int[50];	
 	float node[][] = new float[50][2]; //node[][0]=x  node[][1]=y
 
-	public bigCircle(MainApplet pare){
+	public BigCircle(MainApplet pare){
+		this.x=650;
+		this.y=325;
+		this.radius=250;
+		this.nodesnum=0;
 		this.parent=pare;
 	}
 
@@ -19,7 +23,7 @@ public class bigCircle {
 		this.parent.noFill();
 		this.parent.stroke(0,70);
 		this.parent.strokeWeight(5);
-		this.parent.ellipse(x, y, radius*2, radius*2);
+		this.parent.ellipse(x, y, radius, radius);
 	}
 	
 	public boolean insideCircle(float x,float y){

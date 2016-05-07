@@ -9,6 +9,7 @@ import processing.data.*;
 
 public class Episode {
 	public ArrayList<Character> characters;
+	public BigCircle bc;
 	private String path;
 	private String file;
 	private MainApplet parent;
@@ -19,6 +20,7 @@ public class Episode {
 		this.parent=pare;
 		this.id=num;
 		characters = new ArrayList<Character>();
+		this.bc=new BigCircle(pare);
 	}
 	
 	public void setPath(String pa){
@@ -39,6 +41,8 @@ public class Episode {
 	
 	public void display(){
 		int rgb;
+
+		bc.display();
 		for(Character chara:characters){
 			this.parent.noStroke();
 			rgb=parent.unhex(chara.colour.substring(1));
@@ -59,7 +63,7 @@ public class Episode {
 
 		for(int i=0; i<nodes.size(); i++){
 			JSONObject node = nodes.getJSONObject(i);
-			Character c = new Character(parent, node.getString("name"),node.getString("colour"),i);
+			Character c = new Character(parent, node.getString("name"),node.getString("colour"),i,i);
 			characters.add(c);
 		}
 

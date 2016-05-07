@@ -16,25 +16,28 @@ public class Character{
 	private float x_origin, y_origin;
 	private float rad_origin, rad_expand;
 	public boolean click;
+	public boolean inside;
 	private MainApplet parent;
 	private String name;
 	public String colour;
+	public int id;
 	
 	private ArrayList<Character> targets;
 
-	public Character(MainApplet parent,String name,String colour,int index){
+	public Character(MainApplet parent,String name,String colour,int index,int id_num){
 
 		this.parent = parent;
 		this.name = name;
 		this.colour = colour;
 		this.index = index;
-		this.rad_origin=24;
-		this.rad_expand=30;
+		this.rad_origin=20;
+		this.rad_expand=25;
 		this.x_origin=50+(index/10)*60;
 		this.y_origin=50+(index%10)*60;
 		this.x=this.x_origin;
 		this.y=this.y_origin;
 		this.click=false;
+		this.inside=false;
 		
 		this.targets = new ArrayList<Character>();
 	}
