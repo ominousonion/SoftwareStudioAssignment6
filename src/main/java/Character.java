@@ -1,5 +1,7 @@
 package main.java;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,7 +11,7 @@ import processing.core.PApplet;
 * This class is used to store states of the characters in the program.
 * You will need to declare other variables depending on your implementation.
 */
-public class Character {
+public class Character implements MouseListener{
 	
 	public int x, y, index, radius;
 	public boolean click;
@@ -56,5 +58,50 @@ public class Character {
 	public void addTarget(Character target){ this.targets.add(target); }
 	
 	public ArrayList<Character> getTargets(){ return this.targets; }
+
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if(click==true&&((x-e.getX())*(x-e.getX())+(y-e.getY())*(y-e.getY())<=radius*radius)) click=false;
+		else if(click==false&&((x-e.getX())*(x-e.getX())+(y-e.getY())*(y-e.getY())<=radius*radius)) click=true;
+	}
+
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if(click){
+			x=e.getX();
+			y=e.getY();
+		}
+		
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		click=false;
+	}
 	
 }
