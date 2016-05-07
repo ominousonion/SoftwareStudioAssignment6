@@ -39,6 +39,13 @@ public class Episode {
 	
 	public void display(){
 		for(Character chara:characters){
+			this.parent.noStroke();
+			this.parent.fill(50, 50, 150);
+			this.parent.ellipse(chara.x, chara.y, chara.radius, chara.radius);
+			
+		}
+		
+		for(Character chara:characters){
 			chara.display();
 		}
 	}
