@@ -26,9 +26,14 @@ public class MainApplet extends PApplet{
 	private ArrayList<Episode> episodes;
 
 	Random r=new Random();
-
 	
 	private final static int width = 1200, height = 650;
+	
+	
+	//big circle
+	bigCircle bc = new bigCircle(this);
+	
+	
 	
 	public void setup() {	
 		Ani.init(this);
@@ -44,12 +49,12 @@ public class MainApplet extends PApplet{
 		smooth();
 		loadData();
 		
-		
 	}
 
 	public void draw() {
 		background(255);
 		episodes.get(this.cur_episode-1).display();
+		bc.display();
 	}
 
 	private void loadData(){
@@ -61,6 +66,8 @@ public class MainApplet extends PApplet{
 			epi.loadData(data);
 		}
 	}
+	
+	
 	
 	public void mousePressed() {
 		for(Character chara: episodes.get(this.cur_episode-1).characters){
