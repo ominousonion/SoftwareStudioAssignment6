@@ -47,7 +47,9 @@ public class MainApplet extends PApplet{
 	public void draw() {
 		background(255);
 		
-		
+		for(Episode epi:episodes){
+			epi.display();
+		}
 	}
 
 	private void loadData(){

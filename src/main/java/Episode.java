@@ -37,6 +37,13 @@ public class Episode {
 		return this.file;
 	}
 	
+	public void display(){
+		for(Character chara:characters){
+			chara.display();
+		}
+	}
+	
+	
 	public void loadData(JSONObject data){
 		nodes = data.getJSONArray("nodes");
 		links = data.getJSONArray("links");
