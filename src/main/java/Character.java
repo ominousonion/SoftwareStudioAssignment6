@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import de.looksgood.ani.Ani;
 
-import java.lang.Math;
 
 /**
 * This class is used to store states of the characters in the program.
@@ -19,7 +18,7 @@ public class Character{
 	public boolean click;
 	private MainApplet parent;
 	private String name;
-	private String colour;
+	public String colour;
 	
 	private ArrayList<Character> targets;
 
@@ -43,8 +42,11 @@ public class Character{
 	
 
 	public void display(){
+		int rgb;
 		if(over()){
 			this.radius=this.rad_expand;
+			rgb=this.parent.unhex(colour.substring(1));
+			this.parent.fill(rgb);
 			this.parent.rect(x+5, y-20, name.length()*20, 40, 12, 12, 12, 12);
 			this.parent.textSize(26);
 			this.parent.fill(255);
@@ -66,8 +68,7 @@ public class Character{
 	
 	public void reset(){
 		Ani.to(this, (float) 0.5, "x", this.x_origin);
-		Ani.to(this, (float) 0.5, "y", this.y_origin);		
-		
+		Ani.to(this, (float) 0.5, "y", this.y_origin);			
 	}
 	
 	public void addTarget(Character target){ this.targets.add(target); }
