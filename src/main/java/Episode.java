@@ -43,7 +43,7 @@ public class Episode {
 
 		for(int i=0; i<nodes.size(); i++){
 			JSONObject node = nodes.getJSONObject(i);
-			Character c = new Character(parent, node.getString("name"),node.getString("colour"));
+			Character c = new Character(parent, node.getString("name"),node.getString("colour"),i);
 			characters.add(c);
 		}
 
