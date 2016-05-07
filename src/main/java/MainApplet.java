@@ -26,7 +26,7 @@ public class MainApplet extends PApplet{
 	}
 
 	private void loadData(){
-
+		
 	}
 
 }
