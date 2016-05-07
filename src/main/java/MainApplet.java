@@ -61,5 +61,22 @@ public class MainApplet extends PApplet{
 			epi.loadData(data);
 		}
 	}
+	
+	public void mousePressed() {
+		
+		if(episodes.get(0).characters click==true&&((x-e.getX())*(x-e.getX())+(y-e.getY())*(y-e.getY())<=radius*radius)) click=false;
+		else if(click==false&&((x-e.getX())*(x-e.getX())+(y-e.getY())*(y-e.getY())<=radius*radius)) click=true;
+
+	}
+
+	public void mouseDragged() {
+		 if() {
+		   
+		 }
+	}
+
+	public void mouseReleased() {
+		 
+	}
 
 }

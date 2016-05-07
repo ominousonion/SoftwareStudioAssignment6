@@ -11,10 +11,10 @@ import processing.core.PApplet;
 * This class is used to store states of the characters in the program.
 * You will need to declare other variables depending on your implementation.
 */
-public class Character implements MouseListener{
+public class Character{
 	
 	public int x, y, index, radius;
-	public boolean click;
+	public boolean click=false;
 	private MainApplet parent;
 	private String name;
 	private String colour;
@@ -28,8 +28,8 @@ public class Character implements MouseListener{
 		this.colour = colour;
 		this.index = index;
 		
-		this.x=50+(index/10-1)*60;
-		this.y=50+(index%10-1)*60;
+		this.x=50+(index/10)*60;
+		this.y=50+(index%10)*60;
 		
 		this.targets = new ArrayList<Character>();
 	}
@@ -38,8 +38,8 @@ public class Character implements MouseListener{
 
 	public void display(){
 		
-		if(click) radius=15;
-		else radius=12;
+		if(click) radius=30;
+		else radius=24;
 		this.parent.noStroke();
 		this.parent.fill(50, 50, 150);
 		this.parent.ellipse(x, y, radius, radius);
@@ -59,49 +59,5 @@ public class Character implements MouseListener{
 	
 	public ArrayList<Character> getTargets(){ return this.targets; }
 
-
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		if(click==true&&((x-e.getX())*(x-e.getX())+(y-e.getY())*(y-e.getY())<=radius*radius)) click=false;
-		else if(click==false&&((x-e.getX())*(x-e.getX())+(y-e.getY())*(y-e.getY())<=radius*radius)) click=true;
-	}
-
-
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		if(click){
-			x=e.getX();
-			y=e.getY();
-		}
-		
-	}
-
-
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		click=false;
-	}
 	
 }
