@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import de.looksgood.ani.Ani;
 import processing.core.*;
@@ -56,15 +58,30 @@ public class MainApplet extends PApplet{
 		
 	}
 	
+<<<<<<< HEAD
 	public void ADDALL(){
 		Episode epi=episodes.get(this.cur_episode-1);
 		System.out.println("press add");
 		for(Character chara: epi.characters){
 			epi.bc.addNodes(chara);
 			chara.click=false;			
+=======
+	@SuppressWarnings("deprecation")
+	void controlEvent(ControlEvent theEvent) {
+		  
+		  
+		if(theEvent.isController()) { 	    
+		    if(theEvent.controller().getName()=="ADDALL") {
+		    	Episode epi=episodes.get(this.cur_episode-1);
+				
+				for(Character chara: epi.characters){
+					epi.bc.addNodes(chara);
+					chara.click=false;			
+				}
+				epi.bc.in=false;
+		    }
+>>>>>>> 79bd7b618300ce0bdc4e7c7cc15c3e2b94086aa2
 		}
-		epi.bc.in=false;
-			
 	}
 	
 	public void CLEAR(){
@@ -74,7 +91,7 @@ public class MainApplet extends PApplet{
 			epi.bc.deleteNodes(chara);
 			chara.reset();
 			chara.click=false;
-		}		
+		}		System.out.println("GGG");
 		epi.bc.in=false;	
 	}
 
