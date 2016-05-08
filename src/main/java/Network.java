@@ -34,8 +34,21 @@ public class Network {
 	
 	public void display(){
 		if(target.inside){
-			parent.strokeWeight(value/2);
-			parent.stroke(0,70);
+			if(value < 10){
+				parent.strokeWeight(value);
+			}
+			else{
+				parent.strokeWeight(10);
+			}
+			if(source.over()){
+				parent.stroke(source.rgb);
+			}
+			else if(target.over()){
+				parent.stroke(target.rgb);
+			}
+			else{
+				parent.stroke(0,70);				
+			}
 			parent.bezier(source.x, source.y, circle.x, circle.y,  circle.x, circle.y, target.x, target.y);	
 		}
 	}

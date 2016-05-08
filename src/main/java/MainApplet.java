@@ -128,6 +128,7 @@ public class MainApplet extends PApplet{
 				this.chara_drag.y=this.mouseY;
 				if(this.chara_drag.inside_cir()){
 					episodes.get(this.cur_episode-1).bc.in=true;
+					episodes.get(this.cur_episode-1).bc.rgb=this.chara_drag.rgb;
 				}
 				else{
 					episodes.get(this.cur_episode-1).bc.in=false;

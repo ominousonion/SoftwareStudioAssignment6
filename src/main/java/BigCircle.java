@@ -12,6 +12,7 @@ public class BigCircle {
 	private MainApplet parent;
 	public float x, y, radius;	
 	public boolean in;
+	public int rgb;
 	public int nodesnum;
 	public HashMap<String,Character> nodes;
 
@@ -28,7 +29,7 @@ public class BigCircle {
 	public void display(){
 		this.parent.noFill();
 		if(in){
-			this.parent.stroke(255, 255, 0);
+			this.parent.stroke(rgb);
 		}
 		else{
 			this.parent.stroke(0,70);
