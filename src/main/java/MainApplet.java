@@ -58,31 +58,15 @@ public class MainApplet extends PApplet{
 		
 	}
 	
-<<<<<<< HEAD
+
 	public void ADDALL(){
 		Episode epi=episodes.get(this.cur_episode-1);
 		System.out.println("press add");
 		for(Character chara: epi.characters){
 			epi.bc.addNodes(chara);
-			chara.click=false;			
-=======
-	@SuppressWarnings("deprecation")
-	void controlEvent(ControlEvent theEvent) {
-		  
-		  
-		if(theEvent.isController()) { 	    
-		    if(theEvent.controller().getName()=="ADDALL") {
-		    	Episode epi=episodes.get(this.cur_episode-1);
-				
-				for(Character chara: epi.characters){
-					epi.bc.addNodes(chara);
-					chara.click=false;			
-				}
-				epi.bc.in=false;
-		    }
->>>>>>> 79bd7b618300ce0bdc4e7c7cc15c3e2b94086aa2
+			chara.click=false;
 		}
-	}
+	}			
 	
 	public void CLEAR(){
 		Episode epi=episodes.get(this.cur_episode-1);
