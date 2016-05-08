@@ -56,37 +56,58 @@ public class MainApplet extends PApplet{
 		
 	}			
 	
-
+	public void initialize(){
+		for(int i=0;i<7;i++){
+			for(Character chara:episodes.get(i).characters){
+				chara.moveback();
+				episodes.get(i).bc.deleteNodes(chara);
+				chara.click=false;
+				chara.inside=false;
+			}
+		}
+	}
+	
 	public void keyPressed(){
-		if(keyCode==KeyEvent.VK_NUMPAD1){
+		if(keyCode==KeyEvent.VK_NUMPAD1){			
+			if(cur_episode!=1){
+				initialize();
+			}
 			cur_episode=1;
 		}else if(keyCode==KeyEvent.VK_NUMPAD2){
+			if(cur_episode!=2){
+				initialize();
+			}
 			cur_episode=2;
-		}else if(keyCode==KeyEvent.VK_NUMPAD3){
+		}else if(keyCode==KeyEvent.VK_NUMPAD3){			
+			if(cur_episode!=3){
+				initialize();
+			}
 			cur_episode=3;
 		}else if(keyCode==KeyEvent.VK_NUMPAD4){
+			if(cur_episode!=4){
+				initialize();
+			}
 			cur_episode=4;
 		}else if(keyCode==KeyEvent.VK_NUMPAD5){
+			if(cur_episode!=5){
+				initialize();
+			}
 			cur_episode=5;
 		}else if(keyCode==KeyEvent.VK_NUMPAD6){
+			if(cur_episode!=6){
+				initialize();
+			}
 			cur_episode=6;
 		}else if(keyCode==KeyEvent.VK_NUMPAD7){
+			if(cur_episode!=7){
+				initialize();
+			}
 			cur_episode=7;
 		}
 		title="Starwars Episode "+cur_episode;
 	}
 
-	public void CLEAR(){
-		Episode epi=episodes.get(this.cur_episode-1);
-		
-		for(Character chara: epi.characters){
-			epi.bc.deleteNodes(chara);
-			chara.reset();
-			chara.click=false;
-		}		
-		epi.bc.in=false;	
 
-	}
 
 	public void draw() {
 		background(255);
@@ -156,7 +177,7 @@ public class MainApplet extends PApplet{
 					}
 					else{
 						epi.bc.deleteNodes(this.chara_drag);
-						this.chara_drag.reset();
+						this.chara_drag.moveback();
 					}
 				this.chara_drag.click=false;
 				epi.bc.in=false;				
@@ -167,7 +188,7 @@ public class MainApplet extends PApplet{
 			if(this.chara_drag!=null){
 				if(this.chara_drag.click){
 					epi.bc.deleteNodes(this.chara_drag);
-					this.chara_drag.reset();
+					this.chara_drag.moveback();
 					this.chara_drag.click=false;
 					epi.bc.in=false;				
 				}				
