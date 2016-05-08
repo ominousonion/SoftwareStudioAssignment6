@@ -22,6 +22,7 @@ public class Character{
 	private BigCircle circle;
 	private String name;
 	public String colour;
+	public int rgb;
 	
 	private ArrayList<Network> targets;
 
@@ -40,17 +41,15 @@ public class Character{
 		this.y=this.y_origin;
 		this.click=false;
 		this.inside=false;
-		
+		this.rgb=this.parent.unhex(colour.substring(1));
 		this.targets = new ArrayList<Network>();
 	}
 	
 	
 
 	public void display(){
-		int rgb;
 		if(over()){
 			this.radius=this.rad_expand;
-			rgb=this.parent.unhex(colour.substring(1));
 			this.parent.fill(rgb);
 			this.parent.rect(x+5, y-20, name.length()*20, 40, 12, 12, 12, 12);
 			this.parent.textSize(26);
