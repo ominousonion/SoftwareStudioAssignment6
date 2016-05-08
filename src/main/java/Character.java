@@ -79,19 +79,10 @@ public class Character{
 	}
 	
 	public void reset(){
-		if(inside){
-			Ani.to(this, (float) 0.5, "x", this.x_Incircle);
-			Ani.to(this, (float) 0.5, "y", this.y_Incircle);
-			this.x=this.x_Incircle;
-			this.y=this.y_Incircle;			
-		}
-		else{
-			Ani.to(this, (float) 0.5, "x", this.x_origin);
-			Ani.to(this, (float) 0.5, "y", this.y_origin);
-			this.x=this.x_origin;
-			this.y=this.y_origin;			
-		}
-	
+		Ani.to(this, (float) 0.5, "x", this.x_origin);
+		Ani.to(this, (float) 0.5, "y", this.y_origin);
+		this.x=this.x_origin;
+		this.y=this.y_origin;				
 	}
 	
 	public void addTarget(Character target,int value){ 

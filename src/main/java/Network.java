@@ -49,7 +49,7 @@ public class Network {
 			else{
 				parent.stroke(0,70);				
 			}
-			parent.bezier(source.x, source.y, circle.x, circle.y,  circle.x, circle.y, target.x, target.y);	
+			parent.bezier(source.x, source.y, (circle.x+source.x+target.x)/3, (circle.y+source.y+target.y)/3,  (circle.x+source.x+target.x)/3, (circle.y+source.y+target.y)/3, target.x, target.y);	
 		}
 	}
 	
