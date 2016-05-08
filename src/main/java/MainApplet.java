@@ -87,7 +87,13 @@ public class MainApplet extends PApplet{
 		if(this.inside_Win()){
 			if(this.chara_drag.click){
 				this.chara_drag.x=this.mouseX;
-				this.chara_drag.y=this.mouseY;			
+				this.chara_drag.y=this.mouseY;
+				if(this.chara_drag.inside_cir()){
+					episodes.get(this.cur_episode-1).bc.in=true;
+				}
+				else{
+					episodes.get(this.cur_episode-1).bc.in=false;
+				}
 			}			
 		}
 	}
@@ -104,7 +110,7 @@ public class MainApplet extends PApplet{
 					this.chara_drag.reset();
 				}
 			this.chara_drag.click=false;
-							
+			epi.bc.in=false;				
 			}		
 		}
 	

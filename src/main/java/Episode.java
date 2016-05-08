@@ -43,7 +43,13 @@ public class Episode {
 		int rgb;
 
 		bc.display();
-		
+		for(Character chara:characters){
+			for(Network line:chara.getTargets()){
+				if(chara.inside){
+					line.display();
+				}
+			}
+		}
 		for(Character chara:characters){
 			this.parent.noStroke();
 			rgb=parent.unhex(chara.colour.substring(1));
@@ -69,7 +75,10 @@ public class Episode {
 
 		for(int i=0; i<links.size(); i++){
 			JSONObject link = links.getJSONObject(i);
-			characters.get(link.getInt("source")).addTarget(characters.get(link.getInt("target")));
+			int source = link.getInt("source");
+			int target = link.getInt("target");
+			int value = link.getInt("value");
+			characters.get(source).addTarget(characters.get(target), value);	
 		}
 		
 	}

@@ -11,6 +11,7 @@ public class BigCircle {
 	
 	private MainApplet parent;
 	public float x, y, radius;	
+	public boolean in;
 	public int nodesnum;
 	public HashMap<String,Character> nodes;
 
@@ -20,12 +21,18 @@ public class BigCircle {
 		this.radius=250;
 		this.nodesnum=0;
 		this.parent=pare;
+		this.in=false;
 		this.nodes=new HashMap<String, Character>();
 	}
 
 	public void display(){
 		this.parent.noFill();
-		this.parent.stroke(0,70);
+		if(in){
+			this.parent.stroke(255, 255, 0);
+		}
+		else{
+			this.parent.stroke(0,70);
+		}
 		this.parent.strokeWeight(5);
 		this.parent.ellipse(x, y, radius, radius);
 	}
@@ -46,6 +53,12 @@ public class BigCircle {
 				chara.y=chara.y_Incircle;
 				i++;
 			}			
+		}
+		else{
+			Ani.to(ch, (float) 0.5, "x", ch.x_Incircle);
+			Ani.to(ch, (float) 0.5, "y", ch.y_Incircle);
+			ch.x=ch.x_Incircle;
+			ch.y=ch.y_Incircle;
 		}
 
 	}

@@ -11,15 +11,33 @@ import processing.core.PApplet;
 public class Network {
 	
 	private PApplet parent;
-
-	public Network(PApplet parent){
-
+	private int value;
+	private Character target;
+	private Character source;
+	private BigCircle circle;
+	
+	public Network(PApplet parent, Character so,Character ta, int val, BigCircle bc){
+		this.value = val;
+		this.source = so;
+		this.target = ta;
 		this.parent = parent;
-		
+		this.circle = bc;
 	}
-
+	
+	public Character getTarget(){
+		return target;
+	}
+	
+	public int getValue(){
+		return value;
+	}
+	
 	public void display(){
-		
+		if(target.inside){
+			parent.strokeWeight(value/2);
+			parent.stroke(0,70);
+			parent.bezier(source.x, source.y, circle.x, circle.y,  circle.x, circle.y, target.x, target.y);	
+		}
 	}
 	
 }
