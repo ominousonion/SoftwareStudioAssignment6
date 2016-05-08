@@ -46,10 +46,7 @@ public class MainApplet extends PApplet{
 
 		cur_episode=1;
 		title="Starwars Episode "+cur_episode;
-		
-
-
-		
+	
 		size(width, height);
 		smooth();
 		loadData();
@@ -61,6 +58,7 @@ public class MainApplet extends PApplet{
 			for(Character chara:episodes.get(i).characters){
 				chara.moveback();
 				episodes.get(i).bc.deleteNodes(chara);
+				episodes.get(i).bc.in=false;
 				chara.click=false;
 				chara.inside=false;
 			}
@@ -146,6 +144,16 @@ public class MainApplet extends PApplet{
 				chara.click=false;
 			}
 		}
+		if(episodes.get(this.cur_episode-1).addAll.over()){
+			episodes.get(this.cur_episode-1).addAll.click=true;
+		}
+		else if(episodes.get(this.cur_episode-1).clear.over()){
+			episodes.get(this.cur_episode-1).clear.click=true;
+		}
+		else{
+			episodes.get(this.cur_episode-1).addAll.click=false;
+			episodes.get(this.cur_episode-1).clear.click=false;
+		}
 
 	}
 
@@ -165,6 +173,16 @@ public class MainApplet extends PApplet{
 				}				
 			}
 		}
+		if(episodes.get(this.cur_episode-1).addAll.click){
+			if(!episodes.get(this.cur_episode-1).addAll.over()){
+				episodes.get(this.cur_episode-1).addAll.click=false;
+			}
+		}
+		else if(episodes.get(this.cur_episode-1).clear.click){
+			if(!episodes.get(this.cur_episode-1).clear.over()){
+				episodes.get(this.cur_episode-1).clear.click=false;
+			}
+		}
 	}
 
 	public void mouseReleased() {
@@ -176,12 +194,25 @@ public class MainApplet extends PApplet{
 						epi.bc.addNodes(this.chara_drag);
 					}
 					else{
-						epi.bc.deleteNodes(this.chara_drag);
-						this.chara_drag.moveback();
+						if(this.chara_drag.inside){
+							epi.bc.deleteNodes(this.chara_drag);
+						}
+						else{
+							this.chara_drag.moveback();
+						}
+						
 					}
 				this.chara_drag.click=false;
 				epi.bc.in=false;				
 				}				
+			}
+			if(epi.addAll.click){
+				epi.addAll.function();
+				epi.addAll.click=false;
+			}
+			else if(epi.clear.click){
+				epi.clear.function();
+				epi.clear.click=false;
 			}
 		}
 		else{

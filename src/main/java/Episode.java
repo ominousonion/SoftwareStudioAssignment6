@@ -15,12 +15,15 @@ public class Episode {
 	private MainApplet parent;
 	public int id;
 	JSONArray nodes, links;
+	public Button addAll, clear;
 	
 	public Episode(MainApplet pare,int num){
 		this.parent=pare;
 		this.id=num;
 		characters = new ArrayList<Character>();
 		this.bc=new BigCircle(pare);
+		this.addAll = new AddAll(pare, this, 950, 50, 200, 50, "ADD ALL");
+		this.clear = new Clear(pare, this, 950, 150, 200, 50, "CLEAR");
 	}
 	
 	public void setPath(String pa){
@@ -43,6 +46,8 @@ public class Episode {
 		int rgb;
 
 		bc.display();
+		addAll.dislay();
+		clear.dislay();
 		for(Character chara:characters){
 			for(Network line:chara.getTargets()){
 				if(chara.inside){

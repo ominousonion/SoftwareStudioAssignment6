@@ -10,7 +10,7 @@ import de.looksgood.ani.Ani;
 public class BigCircle {
 	
 	private MainApplet parent;
-	public float x, y, radius;	
+	final public float x, y, radius;	
 	public boolean in;
 	public int rgb;
 	public int nodesnum;
@@ -32,7 +32,7 @@ public class BigCircle {
 			this.parent.stroke(rgb);
 		}
 		else{
-			this.parent.stroke(0,70);
+			this.parent.stroke(200);
 		}
 		this.parent.strokeWeight(5);
 		this.parent.ellipse(x, y, radius, radius);
@@ -71,6 +71,7 @@ public class BigCircle {
 				nodesnum--;	
 				nodes.remove(ch.getName());
 				ch.inside=false;
+				ch.moveback();
 				for(Entry<String, Character> entry : nodes.entrySet()){
 					Character chara=entry.getValue();
 					chara.x_Incircle = this.x + this.radius*parent.cos(i*2*PConstants.PI/(float)nodesnum);

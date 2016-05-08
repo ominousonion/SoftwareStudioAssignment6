@@ -49,7 +49,8 @@ public class Network {
 			else{
 				parent.stroke(0,70);				
 			}
-			parent.bezier(source.x, source.y, (circle.x+source.x+target.x)/3, (circle.y+source.y+target.y)/3,  (circle.x+source.x+target.x)/3, (circle.y+source.y+target.y)/3, target.x, target.y);	
+			parent.noFill();
+			parent.bezier(source.x, source.y, ((source.x+target.x)/2+circle.x*2)/3, ((source.y+target.y)/2+circle.y*2)/3,  ((source.x+target.x)/2+circle.x*2)/3, ((source.y+target.y)/2+circle.y*2)/3, target.x, target.y);	
 		}
 	}
 	
