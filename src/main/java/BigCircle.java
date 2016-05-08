@@ -18,7 +18,7 @@ public class BigCircle {
 
 	public BigCircle(MainApplet pare){
 		this.x=650;
-		this.y=325;
+		this.y=370;
 		this.radius=250;
 		this.nodesnum=0;
 		this.parent=pare;
