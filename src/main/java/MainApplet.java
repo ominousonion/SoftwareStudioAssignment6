@@ -27,8 +27,6 @@ public class MainApplet extends PApplet{
 	private int cur_episode;
 	private Character chara_drag;
 	private ArrayList<Episode> episodes;
-	private ControlP5 cp5;
-
 	Random r=new Random();
 	
 	private final static int width = 1200, height = 650;
@@ -45,38 +43,19 @@ public class MainApplet extends PApplet{
 			epi.setFile("starwars-episode-"+i+"-interactions.json");
 			episodes.add(epi);
 		}
-		cur_episode=1;
-		
-		cp5 = new ControlP5(this);
-		cp5.addButton("ADDALL").setLabel("ADD ALL").setPosition(950, 50).setSize(200, 50);
-		cp5.addButton("CLEAR").setLabel("CLEAR").setPosition(950, 150).setSize(200, 50);
-		
+		cur_episode=1;		
 		
 		size(width, height);
 		smooth();
 		loadData();
 		
-	}
-	
-
-	public void ADDALL(){
-		Episode epi=episodes.get(this.cur_episode-1);
-		System.out.println("press add");
-		for(Character chara: epi.characters){
-			epi.bc.addNodes(chara);
-			chara.click=false;
-		}
 	}			
 	
-	public void CLEAR(){
-		Episode epi=episodes.get(this.cur_episode-1);
-		
-		for(Character chara: epi.characters){
-			epi.bc.deleteNodes(chara);
-			chara.reset();
-			chara.click=false;
-		}		System.out.println("GGG");
-		epi.bc.in=false;	
+	public void keyPressed(){
+		if(keyCode==32){
+			if(cur_episode<8) cur_episode++;
+			else cur_episode=1;
+		}
 	}
 
 	public void draw() {
@@ -99,7 +78,7 @@ public class MainApplet extends PApplet{
 			return true;
 		}
 		else{
-			return false;
+			return true;
 		}
 	}
 	
