@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import controlP5.ControlP5;
 import de.looksgood.ani.Ani;
-import processing.core.PApplet;
+import processing.core.*;
 import processing.data.JSONObject;
 import processing.data.JSONArray;
 import java.util.ArrayList;
@@ -34,6 +34,8 @@ public class MainApplet extends PApplet{
 	public void setup() {	
 		Ani.init(this);
 		this.ellipseMode(this.RADIUS);
+		PFont f = createFont("Georgia",32);
+		this.textFont(f);
 		episodes = new ArrayList<Episode>();
 		for(int i=1;i<8;i++){
 			Episode epi = new Episode(this,i);
@@ -56,7 +58,7 @@ public class MainApplet extends PApplet{
 	
 	public void ADDALL(){
 		Episode epi=episodes.get(this.cur_episode-1);
-		
+		System.out.println("press add");
 		for(Character chara: epi.characters){
 			epi.bc.addNodes(chara);
 			chara.click=false;			
@@ -115,34 +117,40 @@ public class MainApplet extends PApplet{
 
 	public void mouseDragged() {
 		if(this.inside_Win()){
-			if(this.chara_drag.click){
-				this.chara_drag.x=this.mouseX;
-				this.chara_drag.y=this.mouseY;
-				if(this.chara_drag.inside_cir()){
-					episodes.get(this.cur_episode-1).bc.in=true;
-					episodes.get(this.cur_episode-1).bc.rgb=this.chara_drag.rgb;
-				}
-				else{
-					episodes.get(this.cur_episode-1).bc.in=false;
-				}
-			}			
+			if(this.chara_drag!=null){
+				if(this.chara_drag.click){
+					this.chara_drag.x=this.mouseX;
+					this.chara_drag.y=this.mouseY;
+					if(this.chara_drag.inside_cir()){
+						episodes.get(this.cur_episode-1).bc.in=true;
+						episodes.get(this.cur_episode-1).bc.rgb=this.chara_drag.rgb;
+					}
+					else{
+						episodes.get(this.cur_episode-1).bc.in=false;
+					}
+				}				
+			}
+			
 		}
 	}
 
 	public void mouseReleased() {
 		Episode epi=episodes.get(this.cur_episode-1);
 		if(this.inside_Win()){
-			if(this.chara_drag.click){
-				if(this.chara_drag.inside_cir()){
-					epi.bc.addNodes(this.chara_drag);
-				}
-				else{
-					epi.bc.deleteNodes(this.chara_drag);
-					this.chara_drag.reset();
-				}
-			this.chara_drag.click=false;
-			epi.bc.in=false;				
-			}		
+			if(this.chara_drag!=null){
+				if(this.chara_drag.click){
+					if(this.chara_drag.inside_cir()){
+						epi.bc.addNodes(this.chara_drag);
+					}
+					else{
+						epi.bc.deleteNodes(this.chara_drag);
+						this.chara_drag.reset();
+					}
+				this.chara_drag.click=false;
+				epi.bc.in=false;				
+				}				
+			}
+		
 		}
 	
 	}
