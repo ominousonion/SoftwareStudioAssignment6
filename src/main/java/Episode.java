@@ -43,12 +43,12 @@ public class Episode {
 		int rgb;
 
 		bc.display();
+		
 		for(Character chara:characters){
 			this.parent.noStroke();
 			rgb=parent.unhex(chara.colour.substring(1));
 			this.parent.fill(rgb);
-			this.parent.ellipse(chara.x, chara.y, chara.radius, chara.radius);
-			
+			this.parent.ellipse(chara.x, chara.y, chara.radius, chara.radius);	
 		}
 		
 		for(Character chara:characters){
@@ -63,7 +63,7 @@ public class Episode {
 
 		for(int i=0; i<nodes.size(); i++){
 			JSONObject node = nodes.getJSONObject(i);
-			Character c = new Character(parent, node.getString("name"),node.getString("colour"),i,i);
+			Character c = new Character(parent, bc, node.getString("name"), node.getString("colour"), i);
 			characters.add(c);
 		}
 

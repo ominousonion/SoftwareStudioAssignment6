@@ -22,17 +22,13 @@ public class MainApplet extends PApplet{
 	JSONObject data;
 	JSONArray nodes, links;
 	private int cur_episode;
-
+	private Character chara_drag;
 	private ArrayList<Episode> episodes;
 
 	Random r=new Random();
 	
 	private final static int width = 1200, height = 650;
-	
 
-	
-	
-	
 	public void setup() {	
 		Ani.init(this);
 		this.ellipseMode(this.RADIUS);
@@ -65,12 +61,20 @@ public class MainApplet extends PApplet{
 		}
 	}
 	
-	
+	public boolean inside_Win(){
+		if(this.mouseX >= 0 && this.mouseX <= this.width && this.mouseY >= 0 && this.mouseY <= this.height){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 	public void mousePressed() {
 		for(Character chara: episodes.get(this.cur_episode-1).characters){
 			if(chara.over()){
 				chara.click=true;
+				this.chara_drag=chara;
 			}
 			else{
 				chara.click=false;
@@ -80,29 +84,30 @@ public class MainApplet extends PApplet{
 	}
 
 	public void mouseDragged() {
-		for(Character chara: episodes.get(this.cur_episode-1).characters){
-			if(chara.click){
-				chara.x=this.mouseX;
-				chara.y=this.mouseY;
-			}
+		if(this.inside_Win()){
+			if(this.chara_drag.click){
+				this.chara_drag.x=this.mouseX;
+				this.chara_drag.y=this.mouseY;			
+			}			
 		}
-
 	}
 
 	public void mouseReleased() {
 		Episode epi=episodes.get(this.cur_episode-1);
-		
-		for(Character chara: epi.characters){
-			if(epi.bc.insideCircle(chara.x, chara.y)){
-				epi.bc.addNodes(chara.id);
-			}
-			else{
-				epi.bc.deleteNodes(chara.id);
-				chara.click=false;
-				chara.reset();				
-			}
-
+		if(this.inside_Win()){
+			if(this.chara_drag.click){
+				if(this.chara_drag.inside_cir()){
+					epi.bc.addNodes(this.chara_drag);
+				}
+				else{
+					epi.bc.deleteNodes(this.chara_drag);
+					this.chara_drag.reset();
+				}
+			this.chara_drag.click=false;
+							
+			}		
 		}
+	
 	}
 
 }

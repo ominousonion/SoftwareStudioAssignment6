@@ -13,20 +13,22 @@ import de.looksgood.ani.Ani;
 public class Character{
 	
 	public float x, y, index, radius;
+	public float x_Incircle, y_Incircle;
 	private float x_origin, y_origin;
 	private float rad_origin, rad_expand;
 	public boolean click;
 	public boolean inside;
 	private MainApplet parent;
+	private BigCircle circle;
 	private String name;
 	public String colour;
-	public int id;
 	
 	private ArrayList<Character> targets;
 
-	public Character(MainApplet parent,String name,String colour,int index,int id_num){
+	public Character(MainApplet parent, BigCircle bc, String name, String colour, int index){
 
 		this.parent = parent;
+		this.circle = bc;
 		this.name = name;
 		this.colour = colour;
 		this.index = index;
@@ -60,6 +62,7 @@ public class Character{
 		}				
 	}
 	
+	
 	public boolean over(){
 		if( ((parent.mouseX-this.x) * (parent.mouseX-this.x)) + ((parent.mouseY-this.y) * (parent.mouseY-this.y)) <= (this.rad_origin*this.rad_origin)){
 			return true;			
@@ -69,14 +72,29 @@ public class Character{
 		}
 	}
 	
-	public void reset(){
-		Ani.to(this, (float) 0.5, "x", this.x_origin);
-		Ani.to(this, (float) 0.5, "y", this.y_origin);			
+	public boolean inside_cir(){
+		if( ((circle.x-this.x) * (circle.x-this.x)) + ((circle.y-this.y) * (circle.y-this.y)) <= (circle.radius*circle.radius) ){
+			return true;
+		}
+		else return false;
 	}
 	
-	public void addTarget(Character target){ this.targets.add(target); }
+	public void reset(){
+		Ani.to(this, (float) 0.5, "x", this.x_origin);
+		Ani.to(this, (float) 0.5, "y", this.y_origin);
+		this.x=this.x_origin;
+		this.y=this.y_origin;	
+	}
 	
-	public ArrayList<Character> getTargets(){ return this.targets; }
+	public void addTarget(Character target){ 
+		this.targets.add(target); 
+	}
+	
+	public ArrayList<Character> getTargets(){ 
+		return this.targets; 
+	}
 
-	
+	public String getName(){
+		return this.name;
+	}
 }

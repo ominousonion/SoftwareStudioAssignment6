@@ -2,14 +2,17 @@ package main.java;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+import de.looksgood.ani.Ani;
 
 public class BigCircle {
 	
 	private MainApplet parent;
 	public float x, y, radius;	
 	public int nodesnum;
-	public int nodesorder[]=new int[50];	
-	float node[][] = new float[50][2]; //node[][0]=x  node[][1]=y
+	public HashMap<String,Character> nodes;
 
 	public BigCircle(MainApplet pare){
 		this.x=650;
@@ -17,6 +20,7 @@ public class BigCircle {
 		this.radius=250;
 		this.nodesnum=0;
 		this.parent=pare;
+		this.nodes=new HashMap<String, Character>();
 	}
 
 	public void display(){
@@ -26,30 +30,46 @@ public class BigCircle {
 		this.parent.ellipse(x, y, radius, radius);
 	}
 	
-	public boolean insideCircle(float x,float y){
-		if((x-this.x)*(x-this.x)+(y-this.y)*(y-this.y)<=radius*radius) return true;
-		else return false;
+	public void addNodes(Character ch){
+		int i=1;
+		if(!ch.inside){
+			nodesnum++;
+			nodes.put(ch.getName(), ch);
+			ch.inside=true;
+			for(Entry<String, Character> entry : nodes.entrySet()){
+				Character chara=entry.getValue();
+				chara.x_Incircle = this.x + this.radius*parent.cos(i*2*PConstants.PI/(float)nodesnum);
+				chara.y_Incircle = this.y + this.radius*parent.sin(i*2*PConstants.PI/(float)nodesnum);
+				Ani.to(chara, (float) 0.5, "x", chara.x_Incircle);
+				Ani.to(chara, (float) 0.5, "y", chara.y_Incircle);
+				chara.x=chara.x_Incircle;
+				chara.y=chara.y_Incircle;
+				i++;
+			}			
+		}
+
 	}
 	
-	public void addNodes(int index){
-		nodesnum++;
-		nodesorder[nodesnum]=index;
-		for(int i=0;i<nodesnum;i++){
-			node[i][0]=x+radius*PApplet.cos(i*2*PConstants.PI/nodesnum);
-			node[i][1]=y+radius*PApplet.sin(i*2*PConstants.PI/nodesnum);
-			System.out.print(node[i][0]);System.out.print(node[i][1]);System.out.println();
+	public void deleteNodes(Character ch){
+		int i=1;
+		if(ch.inside){
+			if(nodes.containsKey(ch.getName())){
+				nodesnum--;	
+				nodes.remove(ch.getName());
+				ch.inside=false;
+				for(Entry<String, Character> entry : nodes.entrySet()){
+					Character chara=entry.getValue();
+					chara.x_Incircle = this.x + this.radius*parent.cos(i*2*PConstants.PI/(float)nodesnum);
+					chara.y_Incircle = this.y + this.radius*parent.sin(i*2*PConstants.PI/(float)nodesnum);
+					Ani.to(chara, (float) 0.5, "x", chara.x_Incircle);
+					Ani.to(chara, (float) 0.5, "y", chara.y_Incircle);
+					chara.x=chara.x_Incircle;
+					chara.y=chara.y_Incircle;
+					i++;
+				}
+			}			
 		}
-	}
-	
-	public void deleteNodes(int index){
-		int i;
-		nodesnum--;
-		for(i=0;nodesorder[i]!=index;i++)
-		for(;i<nodesnum;i++) nodesorder[i]=nodesorder[i+1];
-		for(i=0;i<nodesnum;i++){
-			node[i][0]=x+radius*PApplet.cos(i*2*PConstants.PI/nodesnum);
-			node[i][1]=y+radius*PApplet.sin(i*2*PConstants.PI/nodesnum);
-			System.out.print(node[i][0]);System.out.print(node[i][1]);System.out.println();
-		}
+
+
 	}
 }
