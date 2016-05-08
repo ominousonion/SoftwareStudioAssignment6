@@ -2,6 +2,7 @@ package main.java;
 
 import java.util.ArrayList;
 import java.util.Random;
+import controlP5.ControlP5;
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -24,6 +25,7 @@ public class MainApplet extends PApplet{
 	private int cur_episode;
 	private Character chara_drag;
 	private ArrayList<Episode> episodes;
+	private ControlP5 cp5;
 
 	Random r=new Random();
 	
@@ -40,10 +42,38 @@ public class MainApplet extends PApplet{
 			episodes.add(epi);
 		}
 		cur_episode=1;
+		
+		cp5 = new ControlP5(this);
+		cp5.addButton("ADDALL").setLabel("ADD ALL").setPosition(950, 50).setSize(200, 50);
+		cp5.addButton("CLEAR").setLabel("CLEAR").setPosition(950, 150).setSize(200, 50);
+		
+		
 		size(width, height);
 		smooth();
 		loadData();
 		
+	}
+	
+	public void ADDALL(){
+		Episode epi=episodes.get(this.cur_episode-1);
+		
+		for(Character chara: epi.characters){
+			epi.bc.addNodes(chara);
+			chara.click=false;			
+		}
+		epi.bc.in=false;
+			
+	}
+	
+	public void CLEAR(){
+		Episode epi=episodes.get(this.cur_episode-1);
+		
+		for(Character chara: epi.characters){
+			epi.bc.deleteNodes(chara);
+			chara.reset();
+			chara.click=false;
+		}		
+		epi.bc.in=false;	
 	}
 
 	public void draw() {
