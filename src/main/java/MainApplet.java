@@ -150,17 +150,7 @@ public class MainApplet extends PApplet{
 				chara.click=false;
 			}
 		}
-		if(episodes.get(this.cur_episode-1).addAll.over()){//if the mouse hover above the "ADDALL" button
-			episodes.get(this.cur_episode-1).addAll.click=true;//the button is clicked (button's function will be triggered only when the mouse is release)
-		}
-		else if(episodes.get(this.cur_episode-1).clear.over()){// the same as the "ADDALL" button
-			episodes.get(this.cur_episode-1).clear.click=true;
-		}
-		else{//no button is clicked
-			episodes.get(this.cur_episode-1).addAll.click=false;
-			episodes.get(this.cur_episode-1).clear.click=false;
-		}
-
+		episodes.get(this.cur_episode-1).mousePressed_button();//check button
 	}
 
 	//when users drag the mouse
@@ -181,16 +171,7 @@ public class MainApplet extends PApplet{
 				}				
 			}
 		}
-		if(episodes.get(this.cur_episode-1).addAll.click){//when users dragging on the button...
-			if(!episodes.get(this.cur_episode-1).addAll.over()){//if the mouse is not hovering above the button 
-				episodes.get(this.cur_episode-1).addAll.click=false;
-			}
-		}
-		else if(episodes.get(this.cur_episode-1).clear.click){//the same as "ADDALL" button
-			if(!episodes.get(this.cur_episode-1).clear.over()){
-				episodes.get(this.cur_episode-1).clear.click=false;
-			}
-		}
+		episodes.get(this.cur_episode-1).mouseDragged_button();//check button
 	}
 
 	//when users release mouse
@@ -215,14 +196,7 @@ public class MainApplet extends PApplet{
 				epi.bc.in=false;//no dragged, no dragged character in the circle				
 				}				
 			}
-			if(epi.addAll.click){//if the button is clicked and released
-				epi.addAll.function();//activate button function
-				epi.addAll.click=false;//button no longer being clicked
-			}
-			else if(epi.clear.click){//the same as "ADDALL" button
-				epi.clear.function();
-				epi.clear.click=false;
-			}
+			epi.mouseReleased_button();//check button
 		}
 		else{//the mouse is outside the window
 			if(this.chara_drag!=null){//prevent dragged character from being null pointer
